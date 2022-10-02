@@ -1,12 +1,15 @@
 package com.tombutler.bestbets.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -15,6 +18,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -34,18 +38,25 @@ public class User {
 	private String email;
 	
 	@NotEmpty(message="Password required!")
-	@Size(min=8, max=48, message="Password must be between 8 and 48 characters")
+	@Size(min=8, max=128, message="Password must be between 8 and 128 characters")
 	private String password;
 	
 	@Transient
 	@NotEmpty(message="Please confirm password")
 	private String confirmPassword;
 	
+	@Value("5")
+	private int balance;
+	
+	
 	@Column(updatable=false)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date createdAt;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date updatedAt;
+	
+	@OneToMany(mappedBy="user", fetch=FetchType.LAZY)
+	private List<Bet> bet;
 	
 	public User() {}
 
@@ -87,6 +98,23 @@ public class User {
 
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
+	}
+	
+	public int getBalance() {
+		return balance;
+	}
+
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
+	
+
+	public List<Bet> getBet() {
+		return bet;
+	}
+
+	public void setBet(List<Bet> bet) {
+		this.bet = bet;
 	}
 
 	public Date getCreatedAt() {

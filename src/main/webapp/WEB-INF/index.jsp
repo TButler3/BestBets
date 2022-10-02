@@ -19,7 +19,7 @@
 				<div class="col">
 				<h1>Register</h1>
 				
-				<form:form action="/registration" method="post" modelAttribute="newUser">
+				<form:form action="/register" method="post" modelAttribute="newUser">
 					<div class="form-group">
 						<form:label path="username">Username</form:label>
 						<form:errors path="username" class="text-danger"/>
