@@ -7,15 +7,14 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Login</title>
+<title>Insert title here</title>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="/css/style.css"/>
 </head>
 <body>
-	<h1>Welcome <c:out value="${loggedInUser.username}"/></h1>
-    <p><c:out value="${loggedInUser.balance}"/></p>
-    
-    <a href="/games">games</a>
-    <a href="/bets/${loggedInUser.id}">My Bets</a>
+	<c:forEach items="${myBets}" var="bet">
+		<p><c:out value="${bet.teamPicked}"/></p>
+		<a href="/bet/edit/${bet.id}">Change Bet</a>
+	</c:forEach>
 </body>
 </html>

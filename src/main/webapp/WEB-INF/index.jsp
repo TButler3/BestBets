@@ -9,12 +9,13 @@
 <meta charset="ISO-8859-1">
 <title>Login</title>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/css/style.css"/>
+<link rel="stylesheet" href="/css/index.css"/>
 </head>
 <body>
 	<div class="hero-image">
 		<div class="container">
 			<h1 class="my-3 text-center" id="index_title">Best Bet</h1>
+			<img src="/img/bestBetsLogo.png" alt="Best Bets" />
 			<div class="row">
 				<div class="col">
 				<h1>Register</h1>

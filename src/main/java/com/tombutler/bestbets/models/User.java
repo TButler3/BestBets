@@ -18,7 +18,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -45,8 +44,7 @@ public class User {
 	@NotEmpty(message="Please confirm password")
 	private String confirmPassword;
 	
-	@Value("5")
-	private int balance;
+	protected int balance = 5;
 	
 	
 	@Column(updatable=false)
