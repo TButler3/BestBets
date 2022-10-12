@@ -1,0 +1,55 @@
+@charset "ISO-8859-1";
+
+* {
+	box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    height: 85px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 10%;
+    background-color: rgb(17, 17, 17);
+}
+
+li, a, p {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    text-decoration: none;
+    color: rgb(141, 134, 134);
+}
+
+
+.nav_links {
+    list-style: none;
+}
+
+.nav_links li {
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.logout {
+    padding: 10px 20px;
+}
+
+.header-img {
+    height: 85px;
+}
+
+.table-container {
+    width: 40%;
+    background-color: rgb(47, 46, 46);
+}
+
+.bet {
+    color: rgb(51, 222, 51);
+}
+
+.body-container {
+    background-color: rgb(121, 120, 120);
+}

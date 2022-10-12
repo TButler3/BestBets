@@ -90,6 +90,30 @@ public class HomeController {
 	
 	@GetMapping("/dashboard")
 	public String dashboard(Model model, HttpSession session) {
+		
+		String apiUrl = "https://sportspage-feeds.p.rapidapi.com/games?status=final&league=NFL&date=2022-10-09";
+		
+		HttpResponse<JsonNode> jsonResponse = null;
+		try {
+			jsonResponse = Unirest.get(apiUrl)
+				.header("X-RapidAPI-Key", "e6f0a9f01dmshd25ffda5908db2ep1406dfjsnd4cc8a4f6f89")
+				.header("X-RapidAPI-Host", "sportspage-feeds.p.rapidapi.com")
+				.asJson();
+		} catch (UnirestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		JSONObject obj = jsonResponse.getBody().getObject();
+		
+		JSONArray jArray = obj.getJSONArray("results");
+		ArrayList<JSONObject> jResults = new ArrayList<JSONObject>();
+		
+		for(int i=0; i<jArray.length(); i++) {
+			jResults.add(jArray.getJSONObject(i));
+		}
+		model.addAttribute("jResults", jResults);
+		System.out.println(obj.toString());
+		
 		if(session.getAttribute("loggedInUser")!=null) {
 			return "dashboard.jsp";
 		} else {
@@ -126,7 +150,7 @@ public class HomeController {
 			
 	
 	@GetMapping("/bet/{gameId}")
-	public String betOnGame(@PathVariable int gameId, Model model, @ModelAttribute("newBet") Bet bet, HttpSession session) {
+	public String betOnGame(@PathVariable int gameId, Model model, @ModelAttribute("newBet") Bet bet, @ModelAttribute("newUser") User user, HttpSession session) {
 		
 		String apiUrl = "https://sportspage-feeds.p.rapidapi.com/gameById?gameId=" + gameId;
 		
@@ -161,13 +185,19 @@ public class HomeController {
 	}
 	
 	@PostMapping("bet/create")
-	public String createBet(@Valid @ModelAttribute("newBet") Bet bet, BindingResult result) {
-		if(result.hasErrors()) {
-			return "betDetails.jsp";
-		} else {
-			betService.createBet(bet);
-			return "redirect:/dashboard";
-		}
+	public String createBet(@Valid @ModelAttribute("newBet") Bet bet, BindingResult result, 
+			HttpSession session, @ModelAttribute("newUser") User user, Model model) {
+//		users.takeBet(bet);
+//		userService.updateUser(users);
+		betService.validateWager(user, bet, result);
+//		if(result.hasErrors()) {
+//			return "betDetails.jsp";
+//		} else {
+		user.setBalance(user.getBalance() - bet.getWager());
+//		userService.updateUser(user);
+		betService.createBet(bet);
+		return "redirect:/dashboard";
+//		}
 	}
 	
 	@GetMapping("/bets/{id}")
@@ -186,7 +216,9 @@ public class HomeController {
 	public String editBet(@PathVariable Long id,
 			HttpSession session,
 			@ModelAttribute("editBet") Bet bet,
-			Model model) {
+			Model model) {			
+			
+		
 		if(session.getAttribute("loggedInUser")!=null) {
 			Bet myBet = betService.getOneBet(id);
 			model.addAttribute("bet", myBet);
@@ -207,7 +239,7 @@ public class HomeController {
 		}
 	}
 	
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("/bet/delete/{id}")
 	public String deleteBet(@PathVariable Long id,
 			HttpSession session) {
 		if(session.getAttribute("loggedInUser")!=null) {
@@ -217,5 +249,23 @@ public class HomeController {
 			return "redirect:/";
 		}
 	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
+	
+	@GetMapping("/addFunds/{id}")
+	public String addFunds(@PathVariable Long id, HttpSession session) {
+		if(session.getAttribute("loggedInUser")!=null) {
+			return "addFunds.jsp";
+		} else {
+			return "redirect:/";
+		}
+	}
+	
+//	@PostMethod("/deposit/{id}")
+//	public
 
 }

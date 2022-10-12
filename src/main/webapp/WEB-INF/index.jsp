@@ -12,10 +12,12 @@
 <link rel="stylesheet" href="/css/index.css"/>
 </head>
 <body>
-	<div class="hero-image">
-		<div class="container">
-			<h1 class="my-3 text-center" id="index_title">Best Bet</h1>
-			<img src="/img/bestBetsLogo.png" alt="Best Bets" />
+	<!-- <div class="hero-image"> -->
+		<header>
+			<img src="/img/bestBetsLogo.png" alt="Best Bets" class="rounded mx-auto d-block" />
+		</header>
+		<div class="container" id="indexbg">
+			
 			<div class="row">
 				<div class="col">
 				<h1>Register</h1>
@@ -62,6 +64,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	<!-- </div> -->
 </body>
 </html>

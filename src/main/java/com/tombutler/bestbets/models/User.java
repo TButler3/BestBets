@@ -44,7 +44,7 @@ public class User {
 	@NotEmpty(message="Please confirm password")
 	private String confirmPassword;
 	
-	protected int balance = 5;
+	private int balance = 5;
 	
 	
 	@Column(updatable=false)
@@ -131,6 +131,16 @@ public class User {
     protected void onUpdate(){
         this.updatedAt = new Date();
     }
+    
+//    public void takeBet(Bet bet) {
+//		this.balance -= bet.getWager();
+//	}
+    
+    public int takeBet(Bet bet) {
+		int userBalance = balance;
+		userBalance -= bet.getWager();
+		return userBalance;
+	}
 	
 	
 }

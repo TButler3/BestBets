@@ -1,9 +1,6 @@
 package com.tombutler.bestbets.models;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -120,6 +118,14 @@ public class Bet {
 //	public void setTeamNotPicked(String teamNotPicked) {
 //		this.teamNotPicked = teamNotPicked;
 //	}
+
+	public String getTeamNotPicked() {
+		return teamNotPicked;
+	}
+
+	public void setTeamNotPicked(String teamNotPicked) {
+		this.teamNotPicked = teamNotPicked;
+	}
 
 	public User getUser() {
 		return user;

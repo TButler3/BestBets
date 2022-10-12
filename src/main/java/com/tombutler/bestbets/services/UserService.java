@@ -40,6 +40,10 @@ public class UserService {
 		return userRepo.findById(id).orElse(null);
 	}
 	
+	public User updateUser(User user) {
+		return userRepo.save(user);
+	}
+	
 //	public User findAll(Long id) {
 //		return userRepo.findAll(id);
 //	}

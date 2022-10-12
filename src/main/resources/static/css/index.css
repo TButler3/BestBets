@@ -1,22 +1,42 @@
 @charset "ISO-8859-1";
 
+/* * {
+  background-color: rgb(17, 17, 17);
+} */
 
-.hero-image {
+ /* #indexbg {
+   background-color: rgb(17, 17, 17); 
+}  */
+
+/* .hero-image { */
   /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
-  background-image: url("/img/index_background.jpg");
+  /*background-image: url("/img/index_background.jpg");
 
   /* Set a specific height */
-  height: 80%;
+  /* height: 80%; */
 
   /* Position and center the image to scale nicely on all screens */
-  background-position: center;
+  /* background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  position: relative;
-}
+  position: relative; */
+/* } */
 
 #index_title {
   color: rgb(104, 240, 111);
   font-family: 'Roboto Slab', serif;
   font-size: 100px;
+}
+
+h1{
+  color: black;
+}
+
+.form-group {
+  color: black;
+}
+
+header {
+  height: 105px;
+  background-color: rgb(17, 17, 17);
 }
